@@ -1,11 +1,16 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.Order;
-import mk.finki.ukim.mk.lab.repository.OrderRepository;
+import mk.finki.ukim.mk.lab.model.User;
+import mk.finki.ukim.mk.lab.repository.impl.InMemoryOrderRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.OrderRepository;
 import mk.finki.ukim.mk.lab.service.OrderService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -17,11 +22,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order placeOrder(String balloonColor, String clientName, String address) {
-        return orderRepository.addOrder(new Order(balloonColor,clientName,address));
+    @Transient
+    public Optional<Order> placeOrder(String balloonColor, String balloonSize, User user) {
+        return Optional.of(orderRepository.save(new Order(balloonColor,balloonSize,user)));
     }
 
     public List<Order> listOrders(){
-        return orderRepository.findAllOrders();
+        return orderRepository.findAll();
     }
 }

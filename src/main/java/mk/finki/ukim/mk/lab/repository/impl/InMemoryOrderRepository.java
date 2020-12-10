@@ -1,6 +1,7 @@
-package mk.finki.ukim.mk.lab.repository;
+package mk.finki.ukim.mk.lab.repository.impl;
 
 import mk.finki.ukim.mk.lab.model.Order;
+import mk.finki.ukim.mk.lab.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class OrderRepository {
+public class InMemoryOrderRepository {
 
     private List<Order> orders;
 
@@ -19,8 +20,8 @@ public class OrderRepository {
             String color = "color"+i;
             String size =  "size"+i;
             String name = "name"+i;
-            String client = "client"+i;
-            orders.add(new Order(color,size,name,client));
+            String password = "client"+i;
+            orders.add(new Order(color,size,new User(name,password)));
         }
     }
 

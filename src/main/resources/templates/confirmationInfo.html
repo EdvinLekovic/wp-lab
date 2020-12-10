@@ -30,13 +30,13 @@
         </tr>
         <th:block th:if="${session.order!=null}"></th:block>
         <tr>
-            <td><b>Client Name </b></td>
-            <td><th:block th:text="${session.order.getClientName()}"></th:block></td>
+            <td><b>Client Username </b></td>
+            <td><th:block th:text="${session.order.user.getUsername()}"></th:block></td>
         </tr>
-        <tr>
-            <td><b>Client Address </b></td>
-            <td><th:block th:text="${session.order.getClientAddress()}"></th:block></td>
-        </tr>
+<!--        <tr>-->
+<!--            <td><b>Client Address </b></td>-->
+<!--            <td><th:block th:text="${session.order.user.g}"></th:block></td>-->
+<!--        </tr>-->
         <tr>
             <td><b>Client IP Address</b></td>
             <td><th:block th:text="${ipAddress}"></th:block></td>

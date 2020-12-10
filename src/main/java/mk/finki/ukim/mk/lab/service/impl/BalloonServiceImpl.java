@@ -1,15 +1,17 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
 import mk.finki.ukim.mk.lab.model.Balloon;
+import mk.finki.ukim.mk.lab.model.Country;
 import mk.finki.ukim.mk.lab.model.Manufacturer;
-import mk.finki.ukim.mk.lab.repository.BalloonRepository;
-import mk.finki.ukim.mk.lab.repository.ManufacturerRepository;
+import mk.finki.ukim.mk.lab.repository.impl.InMemoryBalloonRepository;
+import mk.finki.ukim.mk.lab.repository.impl.InMemoryManufacturerRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.BalloonRepository;
+import mk.finki.ukim.mk.lab.repository.jpa.ManufacturerRepository;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BalloonServiceImpl implements BalloonService {
@@ -24,17 +26,17 @@ public class BalloonServiceImpl implements BalloonService {
 
     @Override
     public List<Balloon> listAll() {
-        return balloonRepository.findAllBalloons();
+        return balloonRepository.findAll();
     }
 
     @Override
-    public List<Balloon> searchByNameOrDescription(String text) {
-        return balloonRepository.findAllByNameOrDescription(text);
+    public List<Balloon> searchByName(String name) {
+        return balloonRepository.findAllByName(name);
     }
 
     @Override
     public Optional<Balloon> findBalloonById(Long id) {
-        return balloonRepository.findBalloonById(id);
+        return balloonRepository.findById(id);
     }
 
     @Override
@@ -44,7 +46,8 @@ public class BalloonServiceImpl implements BalloonService {
                filter(m->m.getId().equals(manufacturerId)).
                findFirst().
                get();
-       return balloonRepository.save(name,description,manufacturer);
+
+       return Optional.of(balloonRepository.save(new Balloon(name,description,manufacturer)));
     }
 
     @Override
@@ -53,7 +56,7 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     public List<Balloon> findBalloonByCountryName(String country){
-    return balloonRepository.findBalloonByCountryName(country);
+    return balloonRepository.findBalloonByManufacturer(new Manufacturer(new Country(country)));
     }
 
 

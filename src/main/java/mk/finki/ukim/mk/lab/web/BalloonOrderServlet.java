@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.web;
 
 import mk.finki.ukim.mk.lab.model.Balloon;
 import mk.finki.ukim.mk.lab.model.Order;
+import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.OrderService;
 import org.thymeleaf.context.WebContext;
@@ -36,10 +37,11 @@ public class BalloonOrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Balloon balloon = (Balloon) req.getSession().getAttribute("balloon");
-        String clientName = req.getParameter("clientName");
-        String clientAddress = req.getParameter("clientAddress");
-        req.getSession().setAttribute("order",new Order(balloon.getColor(),balloon.getSize(),clientName,clientAddress));
-        orderService.placeOrder(balloon.getColor(), balloon.getSize(),clientAddress);
+        String username = req.getParameter("clientName");
+        String password = req.getParameter("clientAddress");
+        User user = new User(username,password);
+        req.getSession().setAttribute("order",new Order(balloon.getColor(),balloon.getSize(),user));
+        orderService.placeOrder(balloon.getColor(), balloon.getSize(),user);
         resp.sendRedirect("/ConfirmationInfo");
     }
 }
