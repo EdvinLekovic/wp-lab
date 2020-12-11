@@ -31,9 +31,9 @@ public class BalloonController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-        String country = (String) request.getSession().getAttribute("country");
-        if(country!=null&&!country.isEmpty()){
-            model.addAttribute("balloons",balloonService.findBalloonByCountryName(country));
+        String nameAndDesc = (String) request.getSession().getAttribute("nameAndDesc");
+        if(nameAndDesc!=null&&!nameAndDesc.isEmpty()){
+            model.addAttribute("balloons",balloonService.findByNameOrDescription(nameAndDesc));
         }
         else {
             model.addAttribute("balloons", balloonService.listAll());
@@ -86,9 +86,9 @@ public class BalloonController {
         return "redirect:/balloons";
     }
 
-    @PostMapping("/countries")
-    public String getCountryName(@RequestParam String country,HttpServletRequest request){
-        request.getSession().setAttribute("country",country);
+    @PostMapping("/nameAndDesc")
+    public String getCountryName(@RequestParam String nameAndDesc,HttpServletRequest request){
+        request.getSession().setAttribute("nameAndDesc",nameAndDesc);
         return "redirect:/balloons";
     }
 }

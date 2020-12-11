@@ -14,14 +14,26 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
+    private String surname;
+
     private String username;
 
     private String password;
+
 
     @OneToMany(mappedBy = "user")
     private List<ShoppingCart> carts;
 
     public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String name, String surname, String username, String password) {
+        this.name = name;
+        this.surname = surname;
         this.username = username;
         this.password = password;
     }

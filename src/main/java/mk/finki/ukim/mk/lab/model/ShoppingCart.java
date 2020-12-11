@@ -29,7 +29,5 @@ public class ShoppingCart {
         this.orders = orders;
     }
 
-    public ShoppingCart() {
-
-    }
+    public ShoppingCart() {}
 }

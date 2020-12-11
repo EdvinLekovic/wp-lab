@@ -14,7 +14,7 @@ public class Manufacturer {
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private Country country;
 
     private String address;

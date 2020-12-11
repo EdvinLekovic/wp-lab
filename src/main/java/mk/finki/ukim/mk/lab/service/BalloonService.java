@@ -13,4 +13,5 @@ public interface BalloonService {
     Optional<Balloon> saveBalloon(String name,String description,Long manufacturerId);
     void deleteById(Long id);
     List<Balloon> findBalloonByCountryName(String country);
+    List<Balloon> findByNameOrDescription(String nameOrDesc);
 }

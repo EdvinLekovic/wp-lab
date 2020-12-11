@@ -33,8 +33,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <form th:method="POST" th:action="@{/balloons/countries}">
-                    <input type="text" name="country">
+                    <form th:method="POST" th:action="@{/balloons/nameAndDesc}">
+                    <input type="text" name="nameAndDesc">
                     <input type="submit" value="Submit">
                     </form>
                         <tr th:each="balloon: ${balloons}">

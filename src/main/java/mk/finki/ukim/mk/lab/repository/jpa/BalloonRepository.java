@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface BalloonRepository extends JpaRepository<Balloon,Long> {
-    List<Balloon> findAllByName(String name);
+    void deleteById(Long id);
+    List<Balloon> findAllByNameContains(String name);
     List<Balloon> findBalloonByManufacturer(Manufacturer manufacturer);
+    List<Balloon> findAllByDescriptionContains(String description);
 }
