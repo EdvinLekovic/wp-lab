@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="ballooon-order-servlet",urlPatterns = "/BalloonOrder")
+@WebServlet(name="balloon-order-servlet",urlPatterns = "/BalloonOrderServlet")
 public class BalloonOrderServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -31,6 +31,7 @@ public class BalloonOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("deliveryInfo.html",webContext,resp.getWriter());
     }
 

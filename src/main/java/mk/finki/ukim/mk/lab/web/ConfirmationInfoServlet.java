@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="confirmation-info-servlet",urlPatterns = "/ConfirmationInfo")
+@WebServlet(name="confirmation-info-servlet",urlPatterns = "/ConfirmationInfoServlet")
 public class ConfirmationInfoServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -28,6 +28,7 @@ public class ConfirmationInfoServlet extends HttpServlet {
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
         webContext.setVariable("ipAddress",req.getRemoteAddr());
         webContext.setVariable("clientAgent",req.getHeader("User-Agent"));
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("confirmationInfo.html",webContext,resp.getWriter());
     }
 

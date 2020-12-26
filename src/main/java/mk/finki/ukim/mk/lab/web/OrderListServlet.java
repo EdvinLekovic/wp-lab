@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name="order-list-servlet",urlPatterns = "/orders")
+@WebServlet(name="order-list-servlet",urlPatterns = "/ordersServlet")
 public class OrderListServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -25,6 +25,7 @@ public class OrderListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
         webContext.setVariable("listOrders",orderService.listOrders());
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("userOrders.html",webContext,resp.getWriter());
     }
 

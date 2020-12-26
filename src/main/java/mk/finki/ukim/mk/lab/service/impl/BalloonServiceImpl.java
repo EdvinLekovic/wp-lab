@@ -43,7 +43,26 @@ public class BalloonServiceImpl implements BalloonService {
     }
 
     public List<Balloon> findByNameOrDescription(String nameOrDesc){
-        return Stream.concat(balloonRepository.findAllByNameContains(nameOrDesc).stream(),balloonRepository.findAllByDescriptionContains(nameOrDesc).stream()).collect(Collectors.toList());
+        //return Stream.concat(balloonRepository.findAllByNameContains(nameOrDesc).stream(),balloonRepository.findAllByDescriptionContains(nameOrDesc).stream()).collect(Collectors.toList());
+        return balloonRepository.findAllByNameOrDescription(nameOrDesc);
+    }
+
+    @Override
+    public Optional<Balloon> editBalloon(Long id, String name, String description, Long manufacturerId) {
+
+        Balloon balloon = balloonRepository.findById(id).get();
+        balloon.setName(name);
+        balloon.setDescription(description);
+
+        Manufacturer manufacturer = manufacturerService.
+                findAll().stream().
+                filter(m->m.getId().equals(manufacturerId)).
+                findFirst().
+                get();
+
+        balloon.setManufacturer(manufacturer);
+
+        return Optional.of(balloonRepository.save(balloon));
     }
 
     @Override

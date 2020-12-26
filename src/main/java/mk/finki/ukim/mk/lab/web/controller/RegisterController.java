@@ -1,6 +1,8 @@
 package mk.finki.ukim.mk.lab.web.controller;
 
+import mk.finki.ukim.mk.lab.model.Role;
 import mk.finki.ukim.mk.lab.service.AuthService;
+import mk.finki.ukim.mk.lab.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegisterController {
 
     private final AuthService authService;
+    private final UserService userService;
 
-    public RegisterController(AuthService authService) {
+    public RegisterController(AuthService authService, UserService userService) {
         this.authService = authService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -24,7 +28,8 @@ public class RegisterController {
             model.addAttribute("hasError",true);
             model.addAttribute("error",error);
         }
-        return "register";
+        model.addAttribute("bodyContent","register");
+        return "master-template";
     }
 
     @PostMapping
@@ -32,9 +37,10 @@ public class RegisterController {
                            @RequestParam String password,
                            @RequestParam String repeatPassword,
                            @RequestParam String name,
-                           @RequestParam String surname){
+                           @RequestParam String surname,
+                           @RequestParam Role role){
         try {
-            authService.register(name, surname, username, password, repeatPassword);
+            userService.register(username,password,repeatPassword,name,surname,role);
             return "redirect:/login";
         } catch (RuntimeException ex){
             return "redirect:/register?error="+ex.getMessage();

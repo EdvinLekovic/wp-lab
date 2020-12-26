@@ -26,6 +26,7 @@ public class BalloonListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
         webContext.setVariable("balloons",balloonService.listAll());
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("listBalloons.html",webContext,resp.getWriter());
     }
 

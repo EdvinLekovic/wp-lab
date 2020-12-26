@@ -1,65 +1,57 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>WP lab - Confirmation Info</title>
-    <style type="text/css">
-        body {
-            width: 800px;
-            margin: auto;
-        }
-        table {
-            width:100%;
-        }
-        table, td, th {
-            border: 1px solid black;
-            padding: 3px 2px;
-        }
-    </style>
-</head>
-<body>
-<section>
-    <header>
-        <h1>Balloon Order page - Order confirmation </h1>
-    </header>
-    <table>
-        <tr>
-            <th colspan="2">
-                Your Order Status
-            </th>
-        </tr>
-        <th:block th:if="${session.order!=null}"></th:block>
-        <tr>
-            <td><b>Client Username </b></td>
-            <td><th:block th:text="${session.order.user.getUsername()}"></th:block></td>
-        </tr>
-<!--        <tr>-->
-<!--            <td><b>Client Address </b></td>-->
-<!--            <td><th:block th:text="${session.order.user.g}"></th:block></td>-->
-<!--        </tr>-->
-        <tr>
-            <td><b>Client IP Address</b></td>
-            <td><th:block th:text="${ipAddress}"></th:block></td>
-        </tr>
-        <tr>
-            <td><b>Client Browser</b></td>
-            <td><th:block th:text="${clientAgent}"></th:block></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Color </b></td>
-            <td><th:block th:text="${session.order.getBalloonColor()}"></th:block></td>
-        </tr>
-        <tr>
-            <td><b>Balloon Size </b></td>
-            <td><th:block th:text="${session.order.getBalloonSize()}"></th:block></td>
-        </tr>
-    </table>
-    <div>
-        <a href="/logout">Log out</a>
-        <a href="/orders">List all orders</a>
-    </div>
+<div xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:th="http://www.thymeleaf.org" class="text-center">
+    <section>
+        <header>
+            <h1>Balloon Order page - Order confirmation </h1>
+        </header>
+        <table>
+            <tr>
+                <th colspan="2">
+                    Your Order Status
+                </th>
+            </tr>
+            <th:block th:if="${session.order!=null}"></th:block>
+            <tr>
+                <td><b>Client Username </b></td>
+                <td>
+                    <th:block th:text="${session.order.user.getUsername()}"></th:block>
+                </td>
+            </tr>
+            <!--        <tr>-->
+            <!--            <td><b>Client Address </b></td>-->
+            <!--            <td><th:block th:text="${session.order.user.g}"></th:block></td>-->
+            <!--        </tr>-->
+            <tr>
+                <td><b>Client IP Address</b></td>
+                <td>
+                    <th:block th:text="${ipAddress}"></th:block>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Client Browser</b></td>
+                <td>
+                    <th:block th:text="${clientAgent}"></th:block>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Balloon Color </b></td>
+                <td>
+                    <th:block th:text="${session.order.getBalloonColor()}"></th:block>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Balloon Size </b></td>
+                <td>
+                    <th:block th:text="${session.order.getBalloonSize()}"></th:block>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <a class="btn btn-light btn-sm ml-3" href="/logout">Log out</a>
+            <a btn btn-success btn-sm ml-3 href="/orders">List all orders</a>
+        </div>
 
 
-</section>
-</body>
-</html>
+    </section>
+    </body>
+</div>

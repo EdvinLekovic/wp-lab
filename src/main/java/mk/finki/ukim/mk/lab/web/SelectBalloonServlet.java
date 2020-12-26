@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "select-balloon-servlet", urlPatterns = "/selectBalloon")
+@WebServlet(name = "select-balloon-servlet", urlPatterns = "/selectBalloonServlet")
 public class SelectBalloonServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
@@ -26,7 +26,9 @@ public class SelectBalloonServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         WebContext webContext = new WebContext(req,resp,req.getServletContext());
-        springTemplateEngine.process("selectBalloonSize.html",webContext,resp.getWriter());
+        resp.setContentType("application/xhtml+xml");
+        webContext.setVariable("bodyContent","selectBalloonSize.html");
+        springTemplateEngine.process("master-template.html",webContext,resp.getWriter());
     }
 
     @Override

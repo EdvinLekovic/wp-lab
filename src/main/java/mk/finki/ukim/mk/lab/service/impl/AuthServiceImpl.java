@@ -1,5 +1,6 @@
 package mk.finki.ukim.mk.lab.service.impl;
 
+import mk.finki.ukim.mk.lab.model.Role;
 import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.model.exceptions.InvalidArgumentsException;
 import mk.finki.ukim.mk.lab.model.exceptions.PasswordsDoNotMatchException;
@@ -30,8 +31,9 @@ public class AuthServiceImpl implements AuthService {
         return userRepository.findByUsernameAndPassword(username,password);
     }
 
+
     @Override
-    public User register(String name, String surname, String username, String password, String repeatPassword) {
+    public User register(String name, String surname, String username, String password, String repeatPassword, Role role) {
         checkUsernameAndPassword(username,password);
         if(!password.equals(repeatPassword)){
             throw new PasswordsDoNotMatchException();
@@ -39,6 +41,6 @@ public class AuthServiceImpl implements AuthService {
         if(userRepository.findByUsername(username).isPresent()){
             throw new UserAlreadyExistsException(username);
         }
-        return userRepository.save(new User(name,surname,username,password));
+        return userRepository.save(new User(name,surname,username,password,role));
     }
 }
